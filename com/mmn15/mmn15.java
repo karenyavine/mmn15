@@ -7,8 +7,9 @@ import java.util.HashMap;
 public class mmn15 {
     public static void main(String[] args) throws Exception {
         try {
+            System.out.println(args);
             RBTree textTree = FileReader.readToRedBlackTree(args[0]);
-            String[] dictionary = FileReader.readChars(args[1]);
+            Map<Integer, String> dictionary = FileReader.readChars(args[1]);
 
 //            String[] incorrectWords = deleteExistingWords(map, text);
 //            for (String word : incorrectWords) {

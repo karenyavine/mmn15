@@ -1,25 +1,30 @@
 package com.mmn15;
 
+import javafx.util.Pair;
+
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FileReader {
-    static public String[] readChars(String filepath) {
+    static public Map<Integer, String> readChars(String filepath) {
         try {
             InputStream is = new FileInputStream(filepath);
             BufferedReader buf = new BufferedReader(new InputStreamReader(is));
 
-            ArrayList<String> ls = new ArrayList<>();
+            PerfectHashMap.Builder<Integer, String> mapBuilder = PerfectHashMap.newBuilder();
 
             String currentLineReaded = buf.readLine();
             while (currentLineReaded != null) {
-                ls.add(currentLineReaded);
+                Integer hash = hash(currentLineReaded);
+                mapBuilder.add(hash, currentLineReaded);
                 currentLineReaded = buf.readLine();
             }
             buf.close();
-            String[] array = ls.toArray(new String[0]);
-            return array;
+            Map a = mapBuilder.build();
+            return a;
         } catch (FileNotFoundException ex) {
             System.out.println("File not found! Exception: " + ex.getMessage());
         } catch (IOException ex) {
@@ -60,5 +65,13 @@ public class FileReader {
             System.out.println("IOException: " + ex.getMessage());
         }
         return tree;
+    }
+
+    static Integer hash(String string) {
+        int hash = 7;
+        for (int i = 0; i < string.length(); i++) {
+            hash = hash*31 + string.charAt(i);
+        }
+        return hash;
     }
 }
