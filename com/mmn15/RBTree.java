@@ -1,6 +1,8 @@
 package com.mmn15;
 import com.mmn15.RBNode;
 
+import java.util.function.Function;
+
 
 public class RBTree
 {
@@ -452,16 +454,16 @@ public class RBTree
     /**
      * This method,prints the current tree, sorted.
      * @param node - The root of the tree been printed.
+     * @param lambda - function to find suggestion for specific node.
      */
-    public void printInOrder(RBNode node)
-    {
+    public void printInOrder(RBNode node, Function<String, String> lambda) {
         if(node != this._nil)
         {
-            this.printInOrder(node.getLeftSon());
-            System.out.println(node.getKey());
-            this.printInOrder(node.getRightSon());
+            this.printInOrder(node.getLeftSon(), lambda);
+            System.out.println(node.getKey() + " " + lambda.apply(node.getKey()));
+            this.printInOrder(node.getRightSon(), lambda);
         }
-    }//End of printInOrder.
+    }
 
 
     /**

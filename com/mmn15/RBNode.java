@@ -99,15 +99,12 @@ public class RBNode
 
     /**
      * This method, uses to set the key,of current node.
-     * The method change the key,only if the new one, contain only digits.
      * @param key - The new key of the current node.
      */
     public void setKey(String key)
     {
         key=key.trim();
-
-        if(key.matches("\\d+"))
-            this._key=key;
+        this._key=key;
 
     }//End of setKey.
 

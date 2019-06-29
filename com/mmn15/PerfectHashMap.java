@@ -228,7 +228,6 @@ public class PerfectHashMap<K, V> implements Map<K, V> {
             int size = 1;
 
             while(hasCollisions(size, keys)) {
-                System.out.println(size);
                 size <<= 1;
             }
 
