@@ -214,20 +214,6 @@ public class RBTree
         if(temp != node)
         {
             node.setKey(temp.getKey());
-
-            //IMPORTANT:
-            //copy temp satellite data into node.
-            //Recognized which type of node it is and send it to the suitable dataMove method.
-
-//            if(node instanceof BookNode && temp instanceof BookNode)
-//                this.moveNodeData(node, temp);
-//            else if(node instanceof MemberNode && temp instanceof MemberNode )
-//                this.moveNodeData(node, temp);
-//            else
-//            {
-//
-//            }
-
         }
 
         if(temp.getColor()==RBNode.Color.BLACK)//if the color is black.//true
