@@ -7,18 +7,19 @@ import java.util.HashMap;
 public class mmn15 {
     public static void main(String[] args) throws Exception {
         try {
-            String text = readFile(args[0]);
-            String dictionary = readFile(args[1]);
+            RBTree textTree = FileReader.readToRedBlackTree(args[0]);
+            String[] dictionary = FileReader.readChars(args[1]);
+//            String dictionary = readFile(args[1]);
+//
+//            Map map = hashDict(dictionary);
+//            System.out.println(map.containsKey("kilo"));
 
-            Map map = hashDict(dictionary);
-            System.out.println(map.containsKey("kilo"));
-
-            String[] incorrectWords = getIncorrectWords(map, text);
-            for (String word : incorrectWords) {
-                if (!map.containsKey(word)) {
-                    System.out.println(word);
-                }
-            }
+//            String[] incorrectWords = getIncorrectWords(map, text);
+//            for (String word : incorrectWords) {
+//                if (!map.containsKey(word)) {
+//                    System.out.println(word);
+//                }
+//            }
 
             System.out.println("you got 100%");
 
