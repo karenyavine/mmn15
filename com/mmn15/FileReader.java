@@ -17,9 +17,11 @@ public class FileReader {
             PerfectHashMap.Builder<Integer, String> mapBuilder = PerfectHashMap.newBuilder();
 
             String currentLineReaded = buf.readLine();
+
+            Integer hash = 0;
             while (currentLineReaded != null) {
-                Integer hash = hash(currentLineReaded);
                 mapBuilder.add(hash, currentLineReaded);
+                hash += 1;
                 currentLineReaded = buf.readLine();
             }
             buf.close();
@@ -65,13 +67,5 @@ public class FileReader {
             System.out.println("IOException: " + ex.getMessage());
         }
         return tree;
-    }
-
-    static Integer hash(String string) {
-        int hash = 7;
-        for (int i = 0; i < string.length(); i++) {
-            hash = hash*31 + string.charAt(i);
-        }
-        return hash;
     }
 }
