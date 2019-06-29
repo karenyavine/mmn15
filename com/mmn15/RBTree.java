@@ -112,7 +112,7 @@ public class RBTree
             node.setColor(RBNode.Color.RED);
             RBInsertFixup(node);
         }
-    }//End of RBInsert.
+    }
 
 
     /**
@@ -180,7 +180,7 @@ public class RBTree
 
         this._root.setColor(RBNode.Color.BLACK);//The root have to be black !.
 
-    }//End of RNInsertFixup.
+    }
 
 
 
@@ -220,7 +220,7 @@ public class RBTree
             RBDeleteFixup(nodeson);
 
         return;
-    }//End of RBDelete.
+    }
 
 
 
@@ -303,11 +303,11 @@ public class RBTree
                 }
             }
 
-        }//While.
+        }
 
         node.setColor(RBNode.Color.BLACK);//root have to be black.
 
-    }//End of RBDeleteFixup.
+    }
 
 
 
@@ -335,7 +335,7 @@ public class RBTree
         }
 
         return successor;
-    }//End of TreeSuccessor.
+    }
 
 
     /**
@@ -350,7 +350,7 @@ public class RBTree
             node=node.getLeftSon();
 
         return node;
-    }//End of TreeMin.
+    }
 
 
 
@@ -378,7 +378,7 @@ public class RBTree
         }
 
         return curr;
-    }//End of search.
+    }
 
 
 
@@ -407,34 +407,33 @@ public class RBTree
         son.setLeftSon(node);
         node.setParent(son);
 
-    }//End of LeftRotate.
+    }
 
 
     /**
      * This method, rotate the given node and its son around the axe.
      * @param node - The node, which the rotate is between it and its son.
      */
-    private void RightRotate(RBNode node)
-    {
+    private void RightRotate(RBNode node) {
 
-        RBNode son=node.getLeftSon();
+        RBNode son = node.getLeftSon();
         node.setLeftSon(son.getRightSon());
 
-        if(son.getRightSon() != this._nil)
+        if (son.getRightSon() != this._nil)
             son.getRightSon().setParent(node);
 
         son.setParent(node.getParent());
 
-        if( node.getParent() == this._nil )
-            this._root=son;
-        else if( node == node.getParent().getLeftSon())
+        if (node.getParent() == this._nil)
+            this._root = son;
+        else if (node == node.getParent().getLeftSon())
             node.getParent().setLeftSon(son);
         else
             node.getParent().setRightSon(son);
 
         son.setRightSon(node);
         node.setParent(son);
-    }//End of RightRotate.
+    }
 
 
     /**
@@ -462,7 +461,6 @@ public class RBTree
     public void moveNodeData(RBNode dest,RBNode source)//dest to source.
     {
         dest.setKey(source.getKey());
-    }//End of moveNodeData.
-
+    }
 
 }

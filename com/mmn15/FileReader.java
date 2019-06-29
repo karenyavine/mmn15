@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class FileReader {
-    static public Map<Integer, String> readChars(String filepath) {
+    static public Map<Integer, String> readToMap(String filepath) {
         try {
             InputStream is = new FileInputStream(filepath);
             BufferedReader buf = new BufferedReader(new InputStreamReader(is));
@@ -18,7 +18,7 @@ public class FileReader {
 
             String currentLineReaded = buf.readLine();
 
-            Integer hash = 0;
+            int hash = 0;
             while (currentLineReaded != null) {
                 mapBuilder.add(hash, currentLineReaded);
                 hash += 1;
@@ -32,7 +32,7 @@ public class FileReader {
         } catch (IOException ex) {
             System.out.println("IOException: " + ex.getMessage());
         }
-        return null;
+        return new HashMap<>();
 
     }
 

@@ -8,11 +8,11 @@ public class mmn15 {
     public static void main(String[] args) throws Exception {
         try {
             RBTree textTree = FileReader.readToRedBlackTree(args[0]);
-            Map<Integer, String> dictionary = FileReader.readChars(args[1]);
+            Map<Integer, String> dictionary = FileReader.readToMap(args[1]);
 
             Set<RBNode> existingInDictionaryWords = new HashSet<>();
             /*FIX: hee? */
-            ToDelete(textTree.getRoot(), dictionary, existingInDictionaryWords);
+            nodesToDelete(textTree.getRoot(), dictionary, existingInDictionaryWords);
 
             for (RBNode word : existingInDictionaryWords) {
                 textTree.RBDelete(word);
@@ -29,20 +29,20 @@ public class mmn15 {
 
     }
 
-    private static void ToDelete(RBNode rootNode, Map<Integer, String> dictionary, Set<RBNode> todel) {
+    private static void nodesToDelete(RBNode rootNode, Map<Integer, String> dictionary, Set<RBNode> todel) {
         String key = rootNode.getKey();
 
-        Boolean contains = dictionary.containsValue(key);
+        boolean contains = dictionary.containsValue(key);
         if (contains) {
             todel.add(rootNode);
         }
 
         if (rootNode.getRightSon() != null && !rootNode.getRightSon().getKey().equals("")) {
-            ToDelete(rootNode.getRightSon(), dictionary, todel);
+            nodesToDelete(rootNode.getRightSon(), dictionary, todel);
         }
 
         if (rootNode.getLeftSon() != null && !rootNode.getLeftSon().getKey().equals("")) {
-            ToDelete(rootNode.getLeftSon(), dictionary, todel);
+            nodesToDelete(rootNode.getLeftSon(), dictionary, todel);
         }
     }
 }
