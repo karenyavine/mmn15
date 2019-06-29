@@ -2,26 +2,29 @@
 import java.io.*;
 import java.util.Map;
 import java.util.HashMap;
-/* 
 
-TODO:
- [x] Read files
-    [x] Dictionary must contain at least 50 words
- [x] Place dictionary in hashmap
-    [] Explain which hashmap type chosen, and explain why this one specifically
-    [] Analyze the time complexity of the hashmap algorithm
- [] Place text file in red-black tree
- [] Remove from tree any word that is in the dictionary
- [] Print remaining words from tree (these are incorrectly spelled words)
-*/
-
-public class readFile {
+public class mmn15 {
     public static void main(String[] args) throws Exception {
-        String text = readFile(args[0]);
-        String dictionary = readFile(args[1]);
-        hashDict(dictionary);
+        try {
+            String text = readFile(args[0]);
+            String dictionary = readFile(args[1]);
 
-        System.out.println("you got 100%");
+            Map map = hashDict(dictionary);
+            System.out.println(map.containsKey("kilo"));
+
+            String[] incorrectWords = getIncorrectWords(map, text);
+            for (String word : incorrectWords) {
+                if (!map.containsKey(word)) {
+                    System.out.println(word);
+                }
+            }
+
+            System.out.println("you got 100%");
+
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            System.out.println("Missing input files: " + ex.getMessage());
+        }
+
     }
 
     private static String readFile(String arg) {
@@ -48,16 +51,21 @@ public class readFile {
         return null;
     }
 
-    private static void hashDict(String dictionary) {
+    private static Map hashDict(String dictionary) {
         Map<String, Object> map = new HashMap<String, Object>();
         // FIXME: do this the hard way, otherwise we get 0
         // Currently this is O(n)
         String words[] = dictionary.split(" ");
         for (String word : words) {
-            map.put(word, null);
+            map.put(word.toLowerCase(), null);
         }
 
-        System.out.println(map.containsKey("kilo"));
+        return map;
     }
 
+    private static String[] getIncorrectWords(Map map, String text) {
+        String[] textBreakdown = text.split(" ");
+        // new String[] incorrectWords;
+        return textBreakdown;
+    }
 }
