@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class MyHashTable {
 
-    private int tableSize = 710000000;
+    private int tableSize = 710000001;
 
     Item[] values = new Item[tableSize];
 
