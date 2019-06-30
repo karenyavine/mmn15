@@ -14,7 +14,9 @@ public class mmn15 {
             RBTree textTree = FileReader.readToRedBlackTree(args[0]);
             MyHashTable dictionary = FileReader.readToMap(args[1]);
 
-            deleteListOfNodesFromTree(textTree,dictionary);
+            RBNode a = textTree.search("row");
+            deleteNodesFromTree(textTree,dictionary);
+            RBNode b = textTree.search("row");
 
             textTree.printInOrder(textTree.getRoot(), word -> Suggestions.getSuggestion(word, dictionary));
 
@@ -24,20 +26,20 @@ public class mmn15 {
 
     }
 
-    private static void deleteListOfNodesFromTree(RBTree tree, MyHashTable dictionary){
-        Set<RBNode> existingInDictionaryNodes = new HashSet<>();
+    private static void deleteNodesFromTree(RBTree tree, MyHashTable dictionary){
+        Set<String> existingInDictionaryWords = new HashSet<>();
 
-        //FIXME: hee?
+        //Recursive call to nodesToDelete, only when done will existingInDictionaryWords be full and then and only then we can delete words
+        nodesToDelete(tree.getRoot(), dictionary, existingInDictionaryWords);
 
-        //Recursive call to nodesToDelete, only when done will existingInDictionaryNodes be full and then and only then we can delete nodes
-        nodesToDelete(tree.getRoot(), dictionary, existingInDictionaryNodes);
-
-        //O(n), n being # of nodes in existingInDictionaryNodes
-        for (RBNode node : existingInDictionaryNodes) {
+        // this section has a time complexity of O(n), n being # of words in existingInDictionaryWords to be deleted.
+        // searching and deletion in Red Black tree has a time complexity of O(log n), thus not affecting the time complexity.
+        for (String word : existingInDictionaryWords) {
+            RBNode node = tree.search(word);
             tree.RBDelete(node);
         }
-
     }
+
     /**
      * nodesToDelete, Given a tree node, dictionary and a Set(list) of nodes, recursively checks if node value exists in
      * dictionary.
@@ -49,12 +51,12 @@ public class mmn15 {
      * @param dictionary - The dictionary map.
      * @param todel - a list of nodes containing correctly spelled words, pending to deletion.
      */
-    private static void nodesToDelete(RBNode rootNode, MyHashTable dictionary, Set<RBNode> todel) {
+    private static void nodesToDelete(RBNode rootNode, MyHashTable dictionary, Set<String> todel) {
         String key = rootNode.getKey();
 
         boolean contains = dictionary.contains(key);
         if (contains) {
-            todel.add(rootNode);
+            todel.add(rootNode.getKey());
         }
 
         if (rootNode.getRightSon() != null && !rootNode.getRightSon().getKey().equals("")) {
