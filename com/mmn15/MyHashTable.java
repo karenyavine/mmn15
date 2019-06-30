@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class MyHashTable {
 
-    private int tableSize = 710000000;
+    private int tableSize = 100000;
 
     Item[] values = new Item[tableSize];
 
@@ -12,7 +12,7 @@ public class MyHashTable {
         int hash = hash(value);
         Item newItem = new Item(value);
 
-        if (values[hash] == null) {
+        if (values[hash] == null || values[hash].value.isEmpty()) {
             values[hash] = newItem;
         } else {
             Item item = values[hash];
@@ -40,8 +40,9 @@ public class MyHashTable {
     int hash(String value) {
         long hash = 0;
         for (int i = 0; i < value.length(); i++) {
-            hash = hash*2 + (int)value.charAt(i);
+            hash = hash*7 + (int)value.charAt(i);
         }
+        if (hash < 0) hash *= -1; // since has is array index it must be positive.
         hash = hash % tableSize;
         return (int)hash;
     }
