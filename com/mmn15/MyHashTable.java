@@ -6,13 +6,24 @@
 
 package com.mmn15;
 
-import java.util.ArrayList;
+
+/**
+ * MyHashTable is a hash table implementation using a linked list, as a collision resolution technique.
+ * This implementation gave is the lowest complexity and easiest implementation, giving it a high ROI.
+ * @timeComplexity of all functions is O(1)
+ֿ */
 
 public class MyHashTable {
 
     private int tableSize = 100000;
 
     Item[] values = new Item[tableSize];
+
+    /**
+     * insert inserts into the hash table.
+     * @timeComplexity O(1)
+     * @param value a given string
+    ֿ */
 
     void insert(String value) {
         int hash = hash(value);
@@ -32,6 +43,13 @@ public class MyHashTable {
         }
     }
 
+    /**
+     * contains checks if the value of the given string exists in the array.
+     * @timeComplexity O(1)
+     * @param value a given string
+     * @return true if the hash table already contains the value, false if not..
+    ֿ */
+
     boolean contains(String value) {
         int hash = hash(value);
 
@@ -43,6 +61,14 @@ public class MyHashTable {
         return false;
     }
 
+    /**
+     * hash is a function that calculates the hash of a given string. The hash will represent the index of the string
+     * in the array.
+     * @timeComplexity O(n)
+     * @param value a given string.
+     * @return a hash of the value.
+    ֿ */
+
     int hash(String value) {
         long hash = 0;
         for (int i = 0; i < value.length(); i++) {
@@ -53,6 +79,9 @@ public class MyHashTable {
         return (int)hash;
     }
 
+    /**
+     * Item is a single chain in the linked list.
+    ֿ */
     private class Item
     {
         String value;
