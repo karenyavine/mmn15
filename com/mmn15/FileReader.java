@@ -7,31 +7,21 @@ public class FileReader {
         try {
             InputStream is = new FileInputStream(filepath);
             BufferedReader buf = new BufferedReader(new InputStreamReader(is));
-
-            //PerfectHashMap.Builder<Integer, String> mapBuilder = PerfectHashMap.newBuilder();
+            MyHashTable hashTable = new MyHashTable();
 
             String currentLineReaded = buf.readLine();
-
-            MyHashTable o = new MyHashTable();
-
             while (currentLineReaded != null) {
-                //mapBuilder.add(hash, currentLineReaded);
-                if (currentLineReaded == "man") {
-                    System.out.println(currentLineReaded);
-                }
-                o.insert(currentLineReaded);
+                hashTable.insert(currentLineReaded);
                 currentLineReaded = buf.readLine();
             }
             buf.close();
-            //Map a = mapBuilder.build();
-            return o;
+            return hashTable;
         } catch (FileNotFoundException ex) {
             System.out.println("File not found! Exception: " + ex.getMessage());
         } catch (IOException ex) {
             System.out.println("IOException: " + ex.getMessage());
         }
         return null;
-
     }
 
     static public RBTree readToRedBlackTree(String filepath) {
