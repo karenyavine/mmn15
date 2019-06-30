@@ -1,10 +1,19 @@
+/**
+ * @author Karen Yavine (308428804)
+ * @author Ohad Shultz (201319563)
+ * @duedate 30/07/2019
+ */
+
 package com.mmn15;
 import com.mmn15.RBNode;
 import java.util.function.Function;
 
 
-public class RBTree
-{
+/**
+ * RBTree.
+ * @timeComplexity O(log n) for Insertion, Deletion and Searching of nodes in tree.
+ */
+public class RBTree {
     private RBNode _root;
     private RBNode _nil ;
 
@@ -13,8 +22,7 @@ public class RBTree
     /**
      * Default constructor.
      */
-    public RBTree()
-    {
+    public RBTree() {
         this._nil = new RBNode();
         this._nil.setColor(RBNode.Color.BLACK);
         this._root = this._nil;
@@ -28,8 +36,7 @@ public class RBTree
      * Constructor,get an RBNode as root.
      * @param node - The new root of this tree.
      */
-    public RBTree(RBNode node)
-    {
+    public RBTree(RBNode node) {
         this._nil= new RBNode();
         this._nil.setColor(RBNode.Color.BLACK);
         this._root=node;
@@ -43,8 +50,7 @@ public class RBTree
      * This method return the root,of this tree.
      * @return - The root of the current tree.
      */
-    public RBNode getRoot()
-    {
+    public RBNode getRoot() {
         return this._root;
     }
 
@@ -71,14 +77,11 @@ public class RBTree
 
 
     //Methods -
-    public void RBInsert(RBNode node)
-    {
+    public void RBInsert(RBNode node) {
         RBNode prev = this._nil,curr = this._root;
         //need to check if the new node not contain a key , that is already in the tree.
-        if(this.search(node.getKey()) == this._nil)//If didn't find any node with the key store in node.(node to be insert).
-        {
-            while(curr != this._nil)
-            {
+        if(this.search(node.getKey()) == this._nil) {//If didn't find any node with the key store in node.(node to be insert).
+            while(curr != this._nil) {
                 prev=curr;
                 if( ( node.getKey().compareTo(curr.getKey()) )  < 0  )
                     curr=curr.getLeftSon();
@@ -90,8 +93,7 @@ public class RBTree
 
             if(prev == this._nil)
                 this._root=node;
-            else
-            {
+            else {
                 if( node.getKey().compareTo(prev.getKey())   < 0  )
                     prev.setLeftSon(node);
                 else
@@ -109,17 +111,13 @@ public class RBTree
      * RBInsertFixup, fix the current(this) red black tree, to it exist all the features of a red black tree.
      * @param node - The...
      */
-    private void RBInsertFixup(RBNode node)
-    {
+    private void RBInsertFixup(RBNode node) {
         RBNode uncle = this.getNill();
-        while(node.getParent().getColor() == RBNode.Color.RED)
-        {
-            if(node.getParent() == node.getGrandparent().getLeftSon() )
-            {
+        while(node.getParent().getColor() == RBNode.Color.RED) {
+            if(node.getParent() == node.getGrandparent().getLeftSon() ) {
                 uncle=node.getGrandparent().getRightSon();
 
-                if(uncle.getColor()==RBNode.Color.RED)
-                {
+                if(uncle.getColor()==RBNode.Color.RED) {
                     node.getParent().setColor(RBNode.Color.BLACK);
                     uncle.setColor(RBNode.Color.BLACK);
 
@@ -139,8 +137,7 @@ public class RBTree
             } else {
                 uncle = node.getGrandparent().getLeftSon();
 
-                if(uncle.getColor()==RBNode.Color.RED)
-                {
+                if(uncle.getColor()==RBNode.Color.RED) {
                     node.getParent().setColor(RBNode.Color.BLACK);
                     uncle.setColor(RBNode.Color.BLACK);
 
@@ -169,7 +166,7 @@ public class RBTree
      * RBDelete, delete a node from the current(this) red black tree.
      * @param node - The node to be deleted.
      */
-    public void RBDelete(RBNode node){
+    public void RBDelete(RBNode node) {
         RBNode nodeson=this._nil,temp=this._nil;
 
         if(node.getLeftSon() == this._nil || node.getRightSon() == this._nil )
@@ -244,7 +241,7 @@ public class RBTree
 
                 }
 
-                if( bro.getRightSon().getColor() == RBNode.Color.BLACK && bro.getLeftSon().getColor() == RBNode.Color.BLACK ) {
+                if (bro.getRightSon().getColor() == RBNode.Color.BLACK && bro.getLeftSon().getColor() == RBNode.Color.BLACK ) {
                     bro.setColor(RBNode.Color.RED);
                     node=node.getParent();
                 } else {

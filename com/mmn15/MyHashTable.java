@@ -1,3 +1,9 @@
+/**
+ * @author Karen Yavine (308428804)
+ * @author Ohad Shultz (201319563)
+ * @duedate 30/07/2019
+ */
+
 package com.mmn15;
 
 import java.util.ArrayList;
