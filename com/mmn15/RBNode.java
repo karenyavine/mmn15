@@ -1,7 +1,6 @@
 package com.mmn15;
 
-public class RBNode
-{
+public class RBNode {
     private String _key;
     private RBNode _parent,_rightSon,_leftSon;
     private Color _color;
@@ -11,8 +10,7 @@ public class RBNode
     /**
      * Default constructor.
      */
-    public RBNode()
-    {
+    public RBNode() {
         this._key="";
         this._parent = this._leftSon = this._rightSon = null;
         //this._color=false;
@@ -25,8 +23,7 @@ public class RBNode
      * The key will be the prime key of the Red-Black Tree structure.
      * @param key - The key of a node,in a Red-Black Tree.
      */
-    public RBNode(String key)
-    {
+    public RBNode(String key) {
         this._key = key;
         this._parent=this._leftSon=this._rightSon=null;
         //this._color=false;
@@ -41,10 +38,9 @@ public class RBNode
      * This method return the key of the node.
      * @return - The key of the node.
      */
-    public String getKey()
-    {
+    public String getKey() {
         return this._key;
-    }//End of getKey.
+    }
 
     /**
      * This method return the parent node of the current node.
@@ -53,18 +49,17 @@ public class RBNode
     public RBNode getParent()
     {
         return this._parent;
-    }//End of getParent.
+    }
 
     /**
      * This method return the Grandparent node of the current node.
      * @return - The Grandparent node of the current node.
      */
-    public RBNode getGrandparent()
-    {
+    public RBNode getGrandparent() {
         if(this._parent != null && this._parent.getParent() != null)
             return this._parent.getParent();
         return null;
-    }//End of getGrandparent.
+    }
 
     /**
      * This method return the right son node of the current node.
@@ -73,16 +68,15 @@ public class RBNode
     public RBNode getRightSon()
     {
         return this._rightSon;
-    }//End of getRightSon.
+    }
 
     /**
      * This method return the left son node of the current node.
      * @return - The left son node of the current node.
      */
-    public RBNode getLeftSon()
-    {
+    public RBNode getLeftSon() {
         return this._leftSon;
-    }//End of getLeftSon.
+    }
 
     /**
      * This method return the color of the current node.
@@ -91,7 +85,7 @@ public class RBNode
     public Color getColor()
     {
         return this._color;
-    }//End of getColor.
+    }
 
 
 
@@ -101,12 +95,11 @@ public class RBNode
      * This method, uses to set the key,of current node.
      * @param key - The new key of the current node.
      */
-    public void setKey(String key)
-    {
+    public void setKey(String key) {
         key=key.trim();
         this._key=key;
 
-    }//End of setKey.
+    }
 
     /**
      * This method sets the parent of the current node.
@@ -115,7 +108,7 @@ public class RBNode
     public void setParent(RBNode parent)
     {
         this._parent = parent;
-    }//End of setParent.
+    }
 
     /**
      * This method sets the right son of the current node.
@@ -124,7 +117,7 @@ public class RBNode
     public void setRightSon(RBNode rightSon)
     {
         this._rightSon = rightSon;
-    }//End of setRightSon.
+    }
 
     /**
      * This method sets the left son of the current node.
@@ -133,7 +126,7 @@ public class RBNode
     public void setLeftSon(RBNode leftSon)
     {
         this._leftSon = leftSon;
-    }//End of setLeftSon.
+    }
 
 
     /**
@@ -143,7 +136,7 @@ public class RBNode
     public void setColor(Color color)
     {
         this._color=color;
-    }//End of setColor.
+    }
 
 
 

@@ -1,6 +1,5 @@
 package com.mmn15;
 import com.mmn15.RBNode;
-
 import java.util.function.Function;
 
 
@@ -17,7 +16,7 @@ public class RBTree
     public RBTree()
     {
         this._nil = new RBNode();
-        this._nil.setColor(RBNode.Color.BLACK);//true
+        this._nil.setColor(RBNode.Color.BLACK);
         this._root = this._nil;
 
         this._root.setRightSon(this._nil);
@@ -32,7 +31,7 @@ public class RBTree
     public RBTree(RBNode node)
     {
         this._nil= new RBNode();
-        this._nil.setColor(RBNode.Color.BLACK);//true
+        this._nil.setColor(RBNode.Color.BLACK);
         this._root=node;
         this._root.setParent(this._nil);
     }
@@ -47,7 +46,7 @@ public class RBTree
     public RBNode getRoot()
     {
         return this._root;
-    }//End of getRoot.
+    }
 
 
     /**
@@ -57,9 +56,7 @@ public class RBTree
     public RBNode getNill()
     {
         return this._nil;
-    }//End of getRoot.
-
-
+    }
 
     //Setters-
 
@@ -70,17 +67,10 @@ public class RBTree
     public void setRoot(RBNode node)
     {
         this._root = node;
-    }//End of getRoot.
+    }
 
 
     //Methods -
-
-
-    /**
-     * RBInsert, insert an RBNode to the current(this) red-black tree.
-     * If such key exist in the tree,do nothing.will not insert it.
-     * @param node - The new node,to be insert.
-     */
     public void RBInsert(RBNode node)
     {
         RBNode prev = this._nil,curr = this._root;
@@ -135,11 +125,8 @@ public class RBTree
 
                     node = node.getGrandparent();
                     node.setColor(RBNode.Color.RED);
-                }
-                else
-                {
-                    if(node == node.getParent().getRightSon())
-                    {
+                } else {
+                    if(node == node.getParent().getRightSon()) {
                         node = node.getParent();
                         LeftRotate(node);
                     }
@@ -149,9 +136,7 @@ public class RBTree
 
                     RightRotate(node.getGrandparent());
                 }
-            }
-            else
-            {
+            } else {
                 uncle = node.getGrandparent().getLeftSon();
 
                 if(uncle.getColor()==RBNode.Color.RED)
@@ -161,9 +146,7 @@ public class RBTree
 
                     node=node.getGrandparent();
                     node.setColor(RBNode.Color.RED);
-                }
-                else
-                {
+                } else {
                     if(node == node.getParent().getLeftSon())
                     {
                         node = node.getParent();
@@ -174,22 +157,19 @@ public class RBTree
                     node.getGrandparent().setColor(RBNode.Color.RED);
                     LeftRotate(node.getGrandparent());
                 }
-
             }
         }
 
-        this._root.setColor(RBNode.Color.BLACK);//The root have to be black !.
+        this._root.setColor(RBNode.Color.BLACK);//The root must to be black.
 
     }
-
 
 
     /**
      * RBDelete, delete a node from the current(this) red black tree.
      * @param node - The node to be deleted.
      */
-    public void RBDelete(RBNode node)
-    {
+    public void RBDelete(RBNode node){
         RBNode nodeson=this._nil,temp=this._nil;
 
         if(node.getLeftSon() == this._nil || node.getRightSon() == this._nil )
@@ -211,8 +191,7 @@ public class RBTree
         else
             temp.getParent().setRightSon(nodeson);
 
-        if(temp != node)
-        {
+        if(temp != node) {
             node.setKey(temp.getKey());
         }
 
@@ -222,39 +201,27 @@ public class RBTree
         return;
     }
 
-
-
-
-
     /**
      * rbDeleteFixup, fix the current(this) red black tree, for it exist all the features of a red black tree.
      * @param node - The node
      */
-    public void RBDeleteFixup(RBNode node)
-    {
+    public void RBDeleteFixup(RBNode node) {
         RBNode bro = this._nil;
 
-        while( node != this._root  && node.getColor()==RBNode.Color.BLACK )
-        {
-            if(node == node.getParent().getLeftSon())
-            {
+        while (node != this._root  && node.getColor()==RBNode.Color.BLACK ) {
+            if (node == node.getParent().getLeftSon()) {
                 bro=node.getParent().getRightSon();
-                if(bro.getColor() == RBNode.Color.RED)
-                {
+                if(bro.getColor() == RBNode.Color.RED) {
                     bro.setColor(RBNode.Color.BLACK);
                     node.getParent().setColor(RBNode.Color.RED);
                     LeftRotate(node.getParent());
                 }
 
-                if(bro.getLeftSon().getColor()== RBNode.Color.BLACK && bro.getRightSon().getColor()== RBNode.Color.BLACK)
-                {
+                if(bro.getLeftSon().getColor()== RBNode.Color.BLACK && bro.getRightSon().getColor()== RBNode.Color.BLACK) {
                     bro.setColor(RBNode.Color.RED);
                     node=node.getParent();
-                }
-                else
-                {
-                    if(bro.getRightSon().getColor()==RBNode.Color.BLACK)
-                    {
+                } else {
+                    if(bro.getRightSon().getColor()==RBNode.Color.BLACK)  {
                         bro.getLeftSon().setColor(RBNode.Color.BLACK);
                         bro.setColor(RBNode.Color.RED);
                         RightRotate(bro);
@@ -267,28 +234,21 @@ public class RBTree
                     LeftRotate(node.getParent());
                     node=this._root;
                 }
-            }
-            else
-            {
+            } else {
                 bro=node.getParent().getLeftSon();
 
-                if(bro.getColor()==RBNode.Color.RED)
-                {
+                if(bro.getColor()==RBNode.Color.RED) {
                     bro.setColor(RBNode.Color.BLACK);
                     node.getParent().setColor(RBNode.Color.RED);
                     RightRotate(node.getParent());
 
                 }
 
-                if( bro.getRightSon().getColor() == RBNode.Color.BLACK && bro.getLeftSon().getColor() == RBNode.Color.BLACK )
-                {
+                if( bro.getRightSon().getColor() == RBNode.Color.BLACK && bro.getLeftSon().getColor() == RBNode.Color.BLACK ) {
                     bro.setColor(RBNode.Color.RED);
                     node=node.getParent();
-                }
-                else
-                {
-                    if(bro.getLeftSon().getColor()== RBNode.Color.BLACK)
-                    {
+                } else {
+                    if(bro.getLeftSon().getColor()== RBNode.Color.BLACK) {
                         bro.getRightSon().setColor(RBNode.Color.BLACK);
                         bro.setColor(RBNode.Color.RED);
                         LeftRotate(bro);
@@ -309,18 +269,12 @@ public class RBTree
 
     }
 
-
-
-    //****************************************************************************************
-    //service methods-
-
     /**
      * TreeSuccessor, find the successor of a node. meaning the next key value.
      * @param node - The node,which the method search its successor.
      * @return - The node that contain the Successor.or null,if not exist.
      */
-    public RBNode TreeSuccessor(RBNode node)
-    {
+    public RBNode TreeSuccessor(RBNode node) {
         RBNode successor=this._nil;
 
         if(node.getRightSon() != this._nil)
@@ -328,23 +282,19 @@ public class RBTree
 
         successor=node.getParent();
 
-        while(successor!=this._nil && node==successor.getRightSon())
-        {
+        while(successor!=this._nil && node==successor.getRightSon()) {
             node=successor;
             successor=successor.getParent();
         }
-
         return successor;
     }
-
 
     /**
      * TreeMin, return the node with the smallest key in the sub-tree, which node(parameter) is its root.
      * @param node - The root of the sub tree, searched for minimum key value.
      * @return - The Node with the smallest key, in the sub tree,whose node is its root.
      */
-    private RBNode TreeMin(RBNode node)
-    {
+    private RBNode TreeMin(RBNode node) {
 
         while(node.getLeftSon() != this._nil)
             node=node.getLeftSon();
@@ -352,23 +302,19 @@ public class RBTree
         return node;
     }
 
-
-
     /**
      * This method search a node in a red black tree,that contain a specific key.
      * @param key - The key,been searched.
      * @return - The node which contain the given key,
      * 			 _nil if not exist.
      */
-    public RBNode search(String key)
-    {
+    public RBNode search(String key){
         RBNode curr = this._root;
 
         if(curr == null)
             return this._nil;
 
-        while ( curr != this._nil  )
-        {
+        while ( curr != this._nil ){
             if( key.equals(curr.getKey()))
                 return curr;
             else if (  key.compareTo(curr.getKey()) > 0  )
@@ -376,19 +322,14 @@ public class RBTree
             else
                 curr=curr.getLeftSon();
         }
-
         return curr;
     }
-
-
-
 
     /**
      * This method, rotate the given node and its son around the axe.
      * @param node - The node, which the rotate is between it and its son.
      */
-    private void LeftRotate(RBNode node)
-    {
+    private void LeftRotate(RBNode node) {
         RBNode son=node.getRightSon();
         node.setRightSon(son.getLeftSon());
 
@@ -435,32 +376,16 @@ public class RBTree
         node.setParent(son);
     }
 
-
     /**
      * This method,prints the current tree, sorted.
      * @param node - The root of the tree been printed.
      * @param lambda - function to find suggestion for specific node.
      */
     public void printInOrder(RBNode node, Function<String, String> lambda) {
-        if(node != this._nil)
-        {
+        if(node != this._nil) {
             this.printInOrder(node.getLeftSon(), lambda);
             System.out.println(node.getKey() + " " + lambda.apply(node.getKey()));
             this.printInOrder(node.getRightSon(), lambda);
         }
     }
-
-
-    /**
-     * This method, copy all the data from source node to dest node.
-     * It makes sure that all data which points to source node, will point to dest node.
-     * It uses during the deletion of a node in red-black tree.
-     * @param dest - The new node, that replace the old one.
-     * @param source - The old node, been erase.
-     */
-    public void moveNodeData(RBNode dest,RBNode source)//dest to source.
-    {
-        dest.setKey(source.getKey());
-    }
-
 }
