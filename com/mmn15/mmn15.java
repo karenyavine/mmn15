@@ -1,6 +1,5 @@
 package com.mmn15;
 
-import java.util.Map;
 import java.util.Set;
 import java.util.HashSet;
 
@@ -8,7 +7,7 @@ public class mmn15 {
     public static void main(String[] args) throws Exception {
         try {
             RBTree textTree = FileReader.readToRedBlackTree(args[0]);
-            Map<Integer, String> dictionary = FileReader.readToMap(args[1]);
+            MyHashTable dictionary = FileReader.readToMap(args[1]);
 
             Set<RBNode> existingInDictionaryWords = new HashSet<>();
             /*FIX: hee? */
@@ -29,10 +28,10 @@ public class mmn15 {
 
     }
 
-    private static void nodesToDelete(RBNode rootNode, Map<Integer, String> dictionary, Set<RBNode> todel) {
+    private static void nodesToDelete(RBNode rootNode, MyHashTable dictionary, Set<RBNode> todel) {
         String key = rootNode.getKey();
 
-        boolean contains = dictionary.containsValue(key);
+        boolean contains = dictionary.contains(key);
         if (contains) {
             todel.add(rootNode);
         }
